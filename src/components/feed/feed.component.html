@@ -1,6 +1,5 @@
-
-<!-- Top Navigation Bar -->
-<header class="fixed top-0 left-0 right-0 z-40 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-200 dark:border-white/5 transition-colors duration-300">
+<!-- Top Navigation Bar (Mobile Only) -->
+<header class="md:hidden fixed top-0 left-0 right-0 z-40 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-200 dark:border-white/5 transition-colors duration-300">
   <div class="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
     <div class="flex items-center gap-3">
       <div class="relative group cursor-pointer">
@@ -28,133 +27,144 @@
 </header>
 
 <!-- Main Content Area -->
-<main class="flex-1 w-full max-w-md mx-auto pt-20 pb-24 px-4 space-y-6">
-  <!-- New Posts Indicator -->
-  <div class="flex justify-center -mt-2 mb-4">
-    <button class="flex items-center gap-2 bg-primary text-background-dark px-4 py-1.5 rounded-full shadow-lg shadow-primary/20 text-sm font-bold transform hover:scale-105 transition-transform">
-      <span class="material-symbols-outlined text-base">arrow_upward</span>
-      New posts
-    </button>
-  </div>
+<div class="w-full">
+  <!-- Desktop Header -->
+  <header class="hidden md:flex items-center justify-between p-4 sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-100 dark:border-border-dark">
+      <h1 class="text-xl font-bold tracking-tight">Feed</h1>
+      <div class="flex items-center gap-2">
+          <!-- Can add desktop specific actions here, e.g., filters -->
+      </div>
+  </header>
 
-  @for (post of posts(); track post.id) {
-    <article class="bg-white dark:bg-card-dark rounded-xl shadow-sm p-4 border border-gray-100 dark:border-white/5">
-      <!-- Post Header -->
-      <div class="flex items-start justify-between mb-3">
-        <div class="flex items-center gap-3">
-            @if (post.profiles?.avatar_url) {
-                <div class="w-10 h-10 rounded-full bg-gray-200 bg-cover bg-center" [style.background-image]="'url(' + post.profiles.avatar_url + ')'"></div>
-            } @else {
-                <div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold text-sm">
-                    {{ getInitials(post.profiles?.full_name) }}
-                </div>
-            }
-          <div>
-            <h3 class="font-bold text-sm leading-tight text-slate-900 dark:text-white">{{ post.profiles?.full_name || 'Usuário Anônimo' }}</h3>
-            <p class="text-xs text-slate-500 dark:text-text-secondary">{{ 'Computer Science • ' + formatTimeAgo(post.created_at) }}</p>
+  <main class="w-full pt-16 md:pt-0 pb-24 md:pb-6 px-4 space-y-6">
+    <!-- New Posts Indicator -->
+    <div class="flex justify-center pt-6">
+      <button class="flex items-center gap-2 bg-primary text-background-dark px-4 py-1.5 rounded-full shadow-lg shadow-primary/20 text-sm font-bold transform hover:scale-105 transition-transform">
+        <span class="material-symbols-outlined text-base">arrow_upward</span>
+        New posts
+      </button>
+    </div>
+
+    @for (post of posts(); track post.id) {
+      <article class="bg-white dark:bg-card-dark rounded-xl shadow-sm p-4 border border-gray-100 dark:border-white/5">
+        <!-- Post Header -->
+        <div class="flex items-start justify-between mb-3">
+          <div class="flex items-center gap-3">
+              @if (post.profiles?.avatar_url) {
+                  <div class="w-10 h-10 rounded-full bg-gray-200 bg-cover bg-center" [style.background-image]="'url(' + post.profiles.avatar_url + ')'"></div>
+              } @else {
+                  <div class="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center text-white font-bold text-sm">
+                      {{ getInitials(post.profiles?.full_name) }}
+                  </div>
+              }
+            <div>
+              <h3 class="font-bold text-sm leading-tight text-slate-900 dark:text-white">{{ post.profiles?.full_name || 'Usuário Anônimo' }}</h3>
+              <p class="text-xs text-slate-500 dark:text-text-secondary">{{ 'Computer Science • ' + formatTimeAgo(post.created_at) }}</p>
+            </div>
+          </div>
+          <div class="flex items-center">
+              @if (isAuthor(post)) {
+                  <button (click)="startEditing(post)" class="text-slate-400 hover:text-slate-600 dark:text-text-secondary dark:hover:text-white p-1">
+                      <span class="material-symbols-outlined text-xl">edit</span>
+                  </button>
+              }
+            <button class="text-slate-400 hover:text-slate-600 dark:text-text-secondary dark:hover:text-white p-1">
+              <span class="material-symbols-outlined text-xl">more_horiz</span>
+            </button>
           </div>
         </div>
-        <div class="flex items-center">
-            @if (isAuthor(post)) {
-                <button (click)="startEditing(post)" class="text-slate-400 hover:text-slate-600 dark:text-text-secondary dark:hover:text-white p-1">
-                    <span class="material-symbols-outlined text-xl">edit</span>
-                </button>
-            }
-          <button class="text-slate-400 hover:text-slate-600 dark:text-text-secondary dark:hover:text-white p-1">
-            <span class="material-symbols-outlined text-xl">more_horiz</span>
-          </button>
-        </div>
-      </div>
-      <!-- Post Content -->
-      <div class="mb-3">
-        @if (editingPostId() === post.id) {
-            <div class="flex flex-col gap-3">
-                <textarea
-                    [(ngModel)]="editingPostContent"
-                    name="editingPostContent"
-                    class="w-full h-28 p-2 bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-border-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition text-sm"
-                    ></textarea>
-                <div class="flex items-center justify-between gap-2">
-                    <button (click)="improveWithAI()" [disabled]="isImprovingWithAI()" class="flex items-center gap-2 text-sm font-semibold text-primary disabled:opacity-60">
-                        @if (isImprovingWithAI()) {
-                            <div class="w-4 h-4 border-2 border-primary/50 border-t-primary rounded-full animate-spin"></div>
-                            <span>Melhorando...</span>
-                        } @else {
-                            <span class="material-symbols-outlined text-base">spark</span>
-                            <span>Melhorar com IA</span>
-                        }
-                    </button>
-                    <div class="flex items-center gap-2">
-                        <button (click)="cancelEditing()" class="px-3 py-1 rounded-full text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-colors">Cancelar</button>
-                        <button (click)="savePost(post)" class="px-4 py-1.5 bg-primary text-background-dark text-sm font-bold rounded-full hover:bg-primary/90 transition-colors">Salvar</button>
-                    </div>
-                </div>
-            </div>
-        } @else {
-            <p class="text-sm leading-relaxed text-slate-700 dark:text-gray-300" [innerHTML]="post.content.replace(/#\w+/g, '<span class=\'text-primary font-medium cursor-pointer\'>$&</span>')"></p>
-        }
-      </div>
-
-      <!-- Media Attachment -->
-      @if (post.media_url && post.media_type) {
-        @switch (post.media_type) {
-          @case ('image') {
-            <div class="mb-4 rounded-lg overflow-hidden relative group aspect-video bg-gray-100 dark:bg-black/20">
-              <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" [style.background-image]="'url(' + post.media_url + ')'"></div>
-            </div>
-          }
-          @case ('pdf') {
-            <div class="mb-4 bg-gray-50 dark:bg-surface-dark/50 rounded-lg p-4 flex flex-col gap-4 border border-gray-200 dark:border-border-dark">
-              <div class="flex items-start gap-4">
-                <div class="w-16 h-16 rounded-lg bg-red-500/10 flex items-center justify-center shrink-0">
-                  <span class="material-symbols-outlined text-red-500 text-4xl">picture_as_pdf</span>
-                </div>
-                <div class="flex-1 min-w-0 pt-1">
-                  <h4 class="text-base font-bold text-slate-900 dark:text-white truncate">Documento PDF</h4>
-                  <p class="text-sm text-slate-500 dark:text-text-secondary">Clique no botão para baixar</p>
-                </div>
+        <!-- Post Content -->
+        <div class="mb-3">
+          @if (editingPostId() === post.id) {
+              <div class="flex flex-col gap-3">
+                  <textarea
+                      [(ngModel)]="editingPostContent"
+                      name="editingPostContent"
+                      class="w-full h-28 p-2 bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-border-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition text-sm"
+                      ></textarea>
+                  <div class="flex items-center justify-between gap-2">
+                      <button (click)="improveWithAI()" [disabled]="isImprovingWithAI()" class="flex items-center gap-2 text-sm font-semibold text-primary disabled:opacity-60">
+                          @if (isImprovingWithAI()) {
+                              <div class="w-4 h-4 border-2 border-primary/50 border-t-primary rounded-full animate-spin"></div>
+                              <span>Melhorando...</span>
+                          } @else {
+                              <span class="material-symbols-outlined text-base">spark</span>
+                              <span>Melhorar com IA</span>
+                          }
+                      </button>
+                      <div class="flex items-center gap-2">
+                          <button (click)="cancelEditing()" class="px-3 py-1 rounded-full text-sm font-medium hover:bg-black/5 dark:hover:bg-white/10 transition-colors">Cancelar</button>
+                          <button (click)="savePost(post)" class="px-4 py-1.5 bg-primary text-background-dark text-sm font-bold rounded-full hover:bg-primary/90 transition-colors">Salvar</button>
+                      </div>
+                  </div>
               </div>
-              <a [href]="post.media_url" target="_blank" class="w-full flex items-center justify-center gap-2 h-11 rounded-full bg-primary text-background-dark font-bold hover:bg-primary/90 transition-colors active:scale-95">
-                <span class="material-symbols-outlined text-xl">download</span>
-                <span>Baixar PDF</span>
-              </a>
-            </div>
+          } @else {
+              <p class="text-sm leading-relaxed text-slate-700 dark:text-gray-300" [innerHTML]="post.content.replace(/#\w+/g, '<span class=\'text-primary font-medium cursor-pointer\'>$&</span>')"></p>
+          }
+        </div>
+
+        <!-- Media Attachment -->
+        @if (post.media_url && post.media_type) {
+          @switch (post.media_type) {
+            @case ('image') {
+              <div class="mb-4 rounded-lg overflow-hidden relative group aspect-video bg-gray-100 dark:bg-black/20">
+                <div class="w-full h-full bg-cover bg-center transition-transform duration-500 group-hover:scale-105" [style.background-image]="'url(' + post.media_url + ')'"></div>
+              </div>
+            }
+            @case ('pdf') {
+              <div class="mb-4 bg-gray-50 dark:bg-surface-dark/50 rounded-lg p-4 flex flex-col gap-4 border border-gray-200 dark:border-border-dark">
+                <div class="flex items-start gap-4">
+                  <div class="w-16 h-16 rounded-lg bg-red-500/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-red-500 text-4xl">picture_as_pdf</span>
+                  </div>
+                  <div class="flex-1 min-w-0 pt-1">
+                    <h4 class="text-base font-bold text-slate-900 dark:text-white truncate">Documento PDF</h4>
+                    <p class="text-sm text-slate-500 dark:text-text-secondary">Clique no botão para baixar</p>
+                  </div>
+                </div>
+                <a [href]="post.media_url" target="_blank" class="w-full flex items-center justify-center gap-2 h-11 rounded-full bg-primary text-background-dark font-bold hover:bg-primary/90 transition-colors active:scale-95">
+                  <span class="material-symbols-outlined text-xl">download</span>
+                  <span>Baixar PDF</span>
+                </a>
+              </div>
+            }
           }
         }
-      }
 
-      <!-- Action Bar -->
-      <div class="flex items-center justify-between border-t border-gray-100 dark:border-white/5 pt-3">
-        <div class="flex gap-6">
-          <button (click)="toggleLike(post)" class="flex items-center gap-1.5 group">
-            <span class="material-symbols-outlined transition-colors" [class.material-symbols-filled]="post.isLiked" [class.text-red-500]="post.isLiked" [class.text-slate-400]="!post.isLiked" [class.dark:text-text-secondary]="!post.isLiked">favorite</span>
-            <span class="text-xs font-semibold text-slate-500 dark:text-text-secondary">{{ post.stats.likes }}</span>
-          </button>
-          <button class="flex items-center gap-1.5 group">
-            <span class="material-symbols-outlined text-slate-400 group-hover:text-primary dark:text-text-secondary transition-colors">chat_bubble</span>
-            <span class="text-xs font-semibold text-slate-500 dark:text-text-secondary">{{ post.stats.comments }}</span>
-          </button>
-          <button class="flex items-center gap-1.5 group">
-            <span class="material-symbols-outlined text-slate-400 group-hover:text-primary dark:text-text-secondary transition-colors">share</span>
+        <!-- Action Bar -->
+        <div class="flex items-center justify-between border-t border-gray-100 dark:border-white/5 pt-3">
+          <div class="flex gap-6">
+            <button (click)="toggleLike(post)" class="flex items-center gap-1.5 group">
+              <span class="material-symbols-outlined transition-colors" [class.material-symbols-filled]="post.isLiked" [class.text-red-500]="post.isLiked" [class.text-slate-400]="!post.isLiked" [class.dark:text-text-secondary]="!post.isLiked">favorite</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-text-secondary">{{ post.stats.likes }}</span>
+            </button>
+            <button class="flex items-center gap-1.5 group">
+              <span class="material-symbols-outlined text-slate-400 group-hover:text-primary dark:text-text-secondary transition-colors">chat_bubble</span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-text-secondary">{{ post.stats.comments }}</span>
+            </button>
+            <button class="flex items-center gap-1.5 group">
+              <span class="material-symbols-outlined text-slate-400 group-hover:text-primary dark:text-text-secondary transition-colors">share</span>
+            </button>
+          </div>
+          <button class="flex items-center gap-1 text-slate-400 dark:text-text-secondary hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-xl">bookmark</span>
           </button>
         </div>
-        <button class="flex items-center gap-1 text-slate-400 dark:text-text-secondary hover:text-primary transition-colors">
-          <span class="material-symbols-outlined text-xl">bookmark</span>
-        </button>
+      </article>
+    }
+
+    <!-- Loading State -->
+    @if (loading()) {
+      <div class="flex justify-center py-4">
+        <div class="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
       </div>
-    </article>
-  }
+    }
+  </main>
+</div>
 
-  <!-- Loading State -->
-  @if (loading()) {
-    <div class="flex justify-center py-4">
-      <div class="w-8 h-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
-    </div>
-  }
-</main>
 
-<!-- Floating Action Button (FAB) -->
-<div class="fixed bottom-24 right-4 z-40 md:right-[calc(50%-220px)]">
+<!-- Floating Action Button (FAB) (Mobile Only) -->
+<div class="md:hidden fixed bottom-24 right-4 z-40">
   <button (click)="openCreatePostModal()" class="w-14 h-14 bg-primary rounded-full shadow-[0_4px_12px_rgba(19,236,106,0.4)] flex items-center justify-center text-background-dark hover:scale-110 active:scale-95 transition-all duration-300 group">
     <span class="material-symbols-outlined group-hover:rotate-90 transition-transform duration-300 text-3xl">add</span>
   </button>

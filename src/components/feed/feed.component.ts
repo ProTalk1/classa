@@ -1,9 +1,9 @@
-
 import { Component, ChangeDetectionStrategy, signal, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SupabaseService, Profile } from '../../services/supabase.service';
 import { GeminiService } from '../../services/gemini.service';
+import { ModalService } from '../../services/modal.service';
 
 interface Post {
   id: number;
@@ -29,11 +29,12 @@ interface Post {
 export class FeedComponent implements OnInit {
   supabase = inject(SupabaseService);
   geminiService = inject(GeminiService);
+  modalService = inject(ModalService);
   profile = this.supabase.profile;
   
   loading = signal(true);
   posts = signal<Post[]>([]);
-  showCreatePostModal = signal(false);
+  showCreatePostModal = this.modalService.showCreatePostModal;
   newPostContent = signal('');
   newPostTags = signal('');
   selectedFile = signal<{ name: string; type: 'image' | 'pdf'; url: string; fileType: string; } | null>(null);
@@ -113,11 +114,11 @@ export class FeedComponent implements OnInit {
   }
 
   openCreatePostModal() {
-    this.showCreatePostModal.set(true);
+    this.modalService.openCreatePostModal();
   }
 
   closeCreatePostModal() {
-    this.showCreatePostModal.set(false);
+    this.modalService.closeCreatePostModal();
     this.newPostContent.set('');
     this.newPostTags.set('');
     this.selectedFile.set(null);
