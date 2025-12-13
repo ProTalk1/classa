@@ -1,0 +1,5 @@
+{
+  "name": "Classa",
+  "description": "A social network application for students to connect, study, and collaborate within their academic community. Features include a main feed, user profiles, groups, and notifications.",
+  "requestFramePermissions": []
+}

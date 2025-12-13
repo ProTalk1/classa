@@ -1,0 +1,28 @@
+
+<div class="relative flex min-h-screen w-full flex-col max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark">
+  <router-outlet />
+
+  <!-- Bottom Navigation Bar -->
+  <nav class="fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-background-dark/95 backdrop-blur-lg border-t border-gray-200 dark:border-white/5">
+    <div class="max-w-md mx-auto h-16 px-6 flex items-center justify-between">
+      <a routerLink="/feed" [class.text-primary]="isRouteActive('/feed')" [class.text-slate-400]="!isRouteActive('/feed')" [class.dark:text-text-secondary]="!isRouteActive('/feed')" class="flex flex-col items-center justify-center gap-1 hover:text-primary dark:hover:text-white w-12 transition-colors">
+        <span class="material-symbols-outlined" [class.material-symbols-filled]="isRouteActive('/feed')">home</span>
+        <span class="text-[10px] font-medium">Feed</span>
+      </a>
+      <a routerLink="/groups" [class.text-primary]="isRouteActive('/groups')" [class.text-slate-400]="!isRouteActive('/groups')" [class.dark:text-text-secondary]="!isRouteActive('/groups')" class="flex flex-col items-center justify-center gap-1 hover:text-primary dark:hover:text-white w-12 transition-colors">
+        <span class="material-symbols-outlined" [class.material-symbols-filled]="isRouteActive('/groups')">groups</span>
+        <span class="text-[10px] font-medium">Grupos</span>
+      </a>
+      <a routerLink="/notifications" [class.text-primary]="isRouteActive('/notifications')" [class.text-slate-400]="!isRouteActive('/notifications')" [class.dark:text-text-secondary]="!isRouteActive('/notifications')" class="flex flex-col items-center justify-center gap-1 hover:text-primary dark:hover:text-white w-12 transition-colors">
+        <span class="material-symbols-outlined" [class.material-symbols-filled]="isRouteActive('/notifications')">notifications</span>
+        <span class="text-[10px] font-medium">Alerts</span>
+      </a>
+      <a routerLink="/profile" [class.text-primary]="isRouteActive('/profile')" [class.text-slate-400]="!isRouteActive('/profile')" [class.dark:text-text-secondary]="!isRouteActive('/profile')" class="flex flex-col items-center justify-center gap-1 hover:text-primary dark:hover:text-white w-12 transition-colors">
+        <span class="material-symbols-outlined" [class.material-symbols-filled]="isRouteActive('/profile')">person</span>
+        <span class="text-[10px] font-medium">Profile</span>
+      </a>
+    </div>
+    <!-- iOS Home Indicator Spacing Area -->
+    <div class="h-safe-area-bottom bg-transparent"></div>
+  </nav>
+</div>

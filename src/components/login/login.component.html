@@ -1,0 +1,121 @@
+
+<div class="relative flex min-h-screen w-full flex-col overflow-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark text-slate-900 dark:text-white">
+  <!-- Background Decoration -->
+  <div class="absolute top-0 left-0 w-full h-[300px] bg-gradient-to-b from-primary/10 to-transparent pointer-events-none z-0"></div>
+  <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-[80px] z-0"></div>
+  
+  <!-- Header -->
+  <header class="relative z-10 flex items-center justify-between p-6">
+    <div class="flex items-center gap-3">
+      <div class="text-primary w-8 h-8">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 16C26 21.5228 21.5228 26 16 26C10.4772 26 6 21.5228 6 16C6 10.4772 10.4772 6 16 6" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="3" fill="currentColor"/>
+        </svg>
+      </div>
+      <span class="text-2xl font-bold tracking-tight">Classa</span>
+    </div>
+    <button (click)="toggleTheme()" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+      <span class="material-symbols-outlined">
+        {{ themeService.theme() === 'dark' ? 'dark_mode' : 'light_mode' }}
+      </span>
+    </button>
+  </header>
+  
+  <!-- Main Content -->
+  <main class="relative z-10 flex flex-1 flex-col px-6 justify-center">
+    <div class="mb-8 text-center sm:text-left">
+      <h1 class="text-4xl font-bold leading-tight tracking-tight mb-2">
+        Sua comunidade <br/>
+        <span class="text-primary">acadêmica</span>
+      </h1>
+      <p class="text-slate-500 dark:text-slate-400 text-lg">
+        Conecte-se, estude e evolua junto.
+      </p>
+    </div>
+    
+    <form class="flex flex-col gap-5" (ngSubmit)="handleLogin()">
+      <!-- Email Field -->
+      <div class="flex flex-col gap-1.5">
+        <label class="sr-only" for="email">Email Institucional</label>
+        <div class="group relative flex items-center rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-transparent focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+          <div class="pl-5 pr-2 text-slate-400 dark:text-slate-500 flex items-center justify-center">
+            <span class="material-symbols-outlined">mail</span>
+          </div>
+          <input [(ngModel)]="email" name="email" class="flex-1 w-full h-14 bg-transparent border-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-0 text-base font-normal leading-normal px-2 rounded-r-full" id="email" placeholder="Email Institucional" type="email" required />
+        </div>
+      </div>
+      
+      <!-- Password Field -->
+      <div class="flex flex-col gap-1.5">
+        <label class="sr-only" for="password">Senha</label>
+        <div class="group relative flex items-center rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-transparent focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+          <div class="pl-5 pr-2 text-slate-400 dark:text-slate-500 flex items-center justify-center">
+            <span class="material-symbols-outlined">lock</span>
+          </div>
+          <input [(ngModel)]="password" name="password" class="flex-1 w-full h-14 bg-transparent border-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-0 text-base font-normal leading-normal px-2" id="password" placeholder="Senha" [type]="passwordVisible() ? 'text' : 'password'" required />
+          <button (click)="togglePasswordVisibility()" class="pr-5 pl-2 text-slate-400 hover:text-primary transition-colors focus:outline-none" type="button">
+            <span class="material-symbols-outlined text-xl">
+              {{ passwordVisible() ? 'visibility' : 'visibility_off' }}
+            </span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Forgot Password -->
+      <div class="flex justify-end">
+        <a class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+          Esqueceu a senha?
+        </a>
+      </div>
+      
+      @if (errorMessage()) {
+        <div class="text-red-500 text-sm text-center p-2 bg-red-500/10 rounded-lg">
+          {{ errorMessage() }}
+        </div>
+      }
+
+      <!-- Main Action -->
+      <button class="mt-2 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all text-background-dark text-lg font-bold leading-normal tracking-wide shadow-lg shadow-primary/25 disabled:opacity-70 disabled:cursor-not-allowed" type="submit" [disabled]="loading()">
+        @if (loading()) {
+          <div class="w-6 h-6 border-2 border-background-dark border-t-transparent rounded-full animate-spin"></div>
+        } @else {
+          <span class="truncate">Acessar Portal</span>
+          <span class="material-symbols-outlined ml-2 text-xl">arrow_forward</span>
+        }
+      </button>
+    </form>
+    
+    <!-- Divider -->
+    <div class="relative my-8">
+      <div class="absolute inset-0 flex items-center">
+        <span class="w-full border-t border-slate-200 dark:border-slate-800"></span>
+      </div>
+      <div class="relative flex justify-center text-xs uppercase">
+        <span class="bg-background-light dark:bg-background-dark px-4 text-slate-500 dark:text-slate-500 tracking-wider font-semibold">
+          Ou entre com
+        </span>
+      </div>
+    </div>
+    
+    <!-- Social Login -->
+    <div class="flex items-center justify-center gap-4">
+      <button class="flex items-center justify-center w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-transparent hover:bg-slate-100 dark:hover:bg-[#233b2e] transition-colors shadow-sm">
+        <img alt="Google logo" class="w-6 h-6" src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"/>
+      </button>
+      <button class="flex items-center justify-center w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-transparent hover:bg-slate-100 dark:hover:bg-[#233b2e] transition-colors shadow-sm">
+        <span class="material-symbols-outlined text-slate-900 dark:text-white text-3xl">ios</span>
+      </button>
+    </div>
+  </main>
+  
+  <!-- Footer -->
+  <footer class="p-6 text-center z-10">
+    <p class="text-slate-500 dark:text-slate-400">
+      Novo por aqui? 
+      <a class="font-bold text-primary hover:underline ml-1" href="#">
+        Crie sua conta
+      </a>
+    </p>
+  </footer>
+</div>
