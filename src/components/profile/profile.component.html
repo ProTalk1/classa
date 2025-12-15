@@ -10,75 +10,77 @@
 </header>
 <!-- Main Content -->
 <main class="flex-1 pb-10">
-    <!-- Profile Picture Section -->
-    <div class="flex flex-col items-center py-6 px-4">
-        <div class="relative group cursor-pointer" (click)="avatarInput.click()">
-            <div class="size-32 rounded-full overflow-hidden border-4 border-white dark:border-surface-dark shadow-lg bg-gray-200 dark:bg-card-dark flex items-center justify-center">
-                @if (avatarUrl()) {
-                    <img class="w-full h-full object-cover" [src]="avatarUrl()" alt="Student portrait profile picture" />
-                } @else {
-                    <span class="material-symbols-outlined text-6xl text-slate-400 dark:text-slate-500">person</span>
-                }
-            </div>
-            <div class="absolute bottom-1 right-1 bg-primary text-black p-2 rounded-full border-4 border-background-light dark:border-background-dark shadow-sm flex items-center justify-center">
-                @if (loading()) {
-                    <div class="w-5 h-5 border-2 border-black/50 border-t-black rounded-full animate-spin"></div>
-                } @else {
-                    <span class="material-symbols-outlined text-[20px]">photo_camera</span>
-                }
-            </div>
-        </div>
-        <p (click)="avatarInput.click()" class="mt-4 text-primary font-medium text-sm cursor-pointer hover:underline">Alterar foto do perfil</p>
-        <input type="file" #avatarInput class="hidden" (change)="uploadAvatar($event)" accept="image/png, image/jpeg" [disabled]="loading()">
-    </div>
-    <!-- Form Fields -->
-    <div class="px-4 space-y-5">
-        <div class="flex flex-col gap-2">
-            <label class="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">Nome Completo</label>
-            <div class="relative">
-                <input [(ngModel)]="fullName" class="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-xl px-4 py-3.5 text-base text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" type="text" />
-            </div>
-        </div>
-        <div class="flex flex-col gap-2">
-            <label class="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">Biografia</label>
-            <div class="relative">
-                <textarea
-                    [(ngModel)]="bio"
-                    name="bio"
-                    rows="4"
-                    class="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-xl px-4 py-3.5 text-base text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none"
-                    placeholder="Fale um pouco sobre você, seus interesses, curso, etc."></textarea>
-            </div>
-        </div>
-    </div>
-    <div class="h-8"></div>
-    <!-- Settings Section -->
-    <div class="px-4 mb-4">
-        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 px-1">Privacidade e Notificações</h3>
-        <div class="bg-white dark:bg-surface-dark rounded-2xl border border-gray-200 dark:border-border-dark overflow-hidden">
-            <!-- Public Profile Toggle -->
-            <div class="flex items-center justify-between p-4">
-                <div class="flex items-center gap-3">
-                    <div class="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400">
-                        <span class="material-symbols-outlined text-[20px]">public</span>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-base font-medium text-slate-900 dark:text-white">Perfil Público</span>
-                        <span class="text-xs text-slate-500 dark:text-slate-400">Visível para não-alunos</span>
-                    </div>
+    <div class="max-w-4xl mx-auto">
+        <!-- Profile Picture Section -->
+        <div class="flex flex-col items-center py-6 px-4">
+            <div class="relative group cursor-pointer" (click)="avatarInput.click()">
+                <div class="size-32 rounded-full overflow-hidden border-4 border-white dark:border-surface-dark shadow-lg bg-gray-200 dark:bg-card-dark flex items-center justify-center">
+                    @if (avatarUrl()) {
+                        <img class="w-full h-full object-cover" [src]="avatarUrl()" alt="Student portrait profile picture" />
+                    } @else {
+                        <span class="material-symbols-outlined text-6xl text-slate-400 dark:text-slate-500">person</span>
+                    }
                 </div>
-                <label class="relative inline-flex items-center cursor-pointer">
-                    <input type="checkbox" value="" class="sr-only peer" checked />
-                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                </label>
+                <div class="absolute bottom-1 right-1 bg-primary text-black p-2 rounded-full border-4 border-background-light dark:border-background-dark shadow-sm flex items-center justify-center">
+                    @if (loading()) {
+                        <div class="w-5 h-5 border-2 border-black/50 border-t-black rounded-full animate-spin"></div>
+                    } @else {
+                        <span class="material-symbols-outlined text-[20px]">photo_camera</span>
+                    }
+                </div>
+            </div>
+            <p (click)="avatarInput.click()" class="mt-4 text-primary font-medium text-sm cursor-pointer hover:underline">Alterar foto do perfil</p>
+            <input type="file" #avatarInput class="hidden" (change)="uploadAvatar($event)" accept="image/png, image/jpeg" [disabled]="loading()">
+        </div>
+        <!-- Form Fields -->
+        <div class="px-4 space-y-5">
+            <div class="flex flex-col gap-2">
+                <label class="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">Nome Completo</label>
+                <div class="relative">
+                    <input [(ngModel)]="fullName" class="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-xl px-4 py-3.5 text-base text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all" type="text" />
+                </div>
+            </div>
+            <div class="flex flex-col gap-2">
+                <label class="text-sm font-medium text-slate-500 dark:text-slate-400 ml-1">Biografia</label>
+                <div class="relative">
+                    <textarea
+                        [(ngModel)]="bio"
+                        name="bio"
+                        rows="4"
+                        class="w-full bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-xl px-4 py-3.5 text-base text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all resize-none"
+                        placeholder="Fale um pouco sobre você, seus interesses, curso, etc."></textarea>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Danger Zone -->
-    <div class="px-4 mt-8 mb-8">
-        <button (click)="handleLogout()" class="w-full py-3.5 rounded-xl border border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/10 font-medium hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined text-[20px]">logout</span>
-            Sair da Conta
-        </button>
+        <div class="h-8"></div>
+        <!-- Settings Section -->
+        <div class="px-4 mb-4">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4 px-1">Privacidade e Notificações</h3>
+            <div class="bg-white dark:bg-surface-dark rounded-2xl border border-gray-200 dark:border-border-dark overflow-hidden">
+                <!-- Public Profile Toggle -->
+                <div class="flex items-center justify-between p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-full text-blue-600 dark:text-blue-400">
+                            <span class="material-symbols-outlined text-[20px]">public</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-base font-medium text-slate-900 dark:text-white">Perfil Público</span>
+                            <span class="text-xs text-slate-500 dark:text-slate-400">Visível para não-alunos</span>
+                        </div>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" value="" class="sr-only peer" checked />
+                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- Danger Zone -->
+        <div class="px-4 mt-8 mb-8">
+            <button (click)="handleLogout()" class="w-full py-3.5 rounded-xl border border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/10 font-medium hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[20px]">logout</span>
+                Sair da Conta
+            </button>
+        </div>
     </div>
 </main>

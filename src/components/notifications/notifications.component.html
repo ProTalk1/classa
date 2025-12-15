@@ -1,7 +1,6 @@
-
 <div class="flex h-full w-full flex-col min-h-screen">
   <!-- Header -->
-  <header class="sticky top-0 z-20 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-black/5 dark:border-white/5 pt-10 pb-4 px-4">
+  <header class="sticky md:static top-0 z-20 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-black/5 dark:border-white/5 pt-10 pb-4 px-4">
     <div class="flex items-center justify-between mb-4">
       <h2 class="text-2xl font-bold leading-tight tracking-tight">Notificações</h2>
       <button class="text-primary text-sm font-semibold hover:opacity-80 transition-opacity">
@@ -27,47 +26,49 @@
 
   <!-- Notification List -->
   <main class="flex-1 flex flex-col pb-20">
-    <!-- Section: New -->
-    <div class="px-4 py-3">
-      <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Novo</p>
-      <!-- Item 1: Invite (Unread) -->
-      <div class="group relative flex gap-4 p-4 mb-2 rounded-2xl bg-white dark:bg-surface-dark shadow-sm border border-black/5 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-[#23352b] transition-all cursor-pointer">
-        <div class="absolute right-4 top-4 w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(19,236,106,0.6)]"></div>
-        <div class="relative shrink-0">
-          <div class="h-12 w-12 rounded-full bg-cover bg-center border border-white/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWtp4vq3DGCLoTLgKDaz8KwbyBcaV1hxawrvMzu46zf2rXkK7BIh1y9iE2giHnuAkz9FWdFAmbR3A4gUjWKBHz8d9doCFn8xxCaEfCkcdKtfoH8Bbyza-ovX8Z3tEpk9_VvNUpIPu9md1aCGV2Jb-eOCZfyp235V_VjIOlwCtSK_iCwY9Ct0dRB3chuUaRYD7h9LDOP275eeulx46skBmW9eT22pWRijw_9bB4b9vqSLAdlzwXG2WlL1DMu65sIpE3_XuSBAkOVZgd');"></div>
-          <div class="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary ring-2 ring-white dark:ring-background-dark">
-            <span class="material-symbols-outlined text-background-dark text-[14px] font-bold">group</span>
+    <div class="max-w-4xl mx-auto w-full">
+      <!-- Section: New -->
+      <div class="px-4 py-3">
+        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Novo</p>
+        <!-- Item 1: Invite (Unread) -->
+        <div class="group relative flex gap-4 p-4 mb-2 rounded-2xl bg-white dark:bg-surface-dark shadow-sm border border-black/5 dark:border-white/5 hover:bg-gray-50 dark:hover:bg-[#23352b] transition-all cursor-pointer">
+          <div class="absolute right-4 top-4 w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(19,236,106,0.6)]"></div>
+          <div class="relative shrink-0">
+            <div class="h-12 w-12 rounded-full bg-cover bg-center border border-white/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAWtp4vq3DGCLoTLgKDaz8KwbyBcaV1hxawrvMzu46zf2rXkK7BIh1y9iE2giHnuAkz9FWdFAmbR3A4gUjWKBHz8d9doCFn8xxCaEfCkcdKtfoH8Bbyza-ovX8Z3tEpk9_VvNUpIPu9md1aCGV2Jb-eOCZfyp235V_VjIOlwCtSK_iCwY9Ct0dRB3chuUaRYD7h9LDOP275eeulx46skBmW9eT22pWRijw_9bB4b9vqSLAdlzwXG2WlL1DMu65sIpE3_XuSBAkOVZgd');"></div>
+            <div class="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary ring-2 ring-white dark:ring-background-dark">
+              <span class="material-symbols-outlined text-background-dark text-[14px] font-bold">group</span>
+            </div>
           </div>
-        </div>
-        <div class="flex flex-1 flex-col gap-2">
-          <div class="flex flex-col">
-            <p class="text-sm text-slate-900 dark:text-white leading-snug">
-              <span class="font-bold">Grupo de Física Quântica</span> convidou você para participar.
-            </p>
-            <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">há 15 min</span>
-          </div>
-          <div class="flex gap-2 mt-1">
-            <button class="h-8 px-4 rounded-full bg-primary text-background-dark text-xs font-bold shadow-lg shadow-primary/20 hover:bg-[#0fd65d] transition-colors">Aceitar</button>
-            <button class="h-8 px-4 rounded-full border border-gray-300 dark:border-white/20 text-gray-700 dark:text-white text-xs font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors">Recusar</button>
+          <div class="flex flex-1 flex-col gap-2">
+            <div class="flex flex-col">
+              <p class="text-sm text-slate-900 dark:text-white leading-snug">
+                <span class="font-bold">Grupo de Física Quântica</span> convidou você para participar.
+              </p>
+              <span class="text-xs text-gray-500 dark:text-gray-400 mt-1">há 15 min</span>
+            </div>
+            <div class="flex gap-2 mt-1">
+              <button class="h-8 px-4 rounded-full bg-primary text-background-dark text-xs font-bold shadow-lg shadow-primary/20 hover:bg-[#0fd65d] transition-colors">Aceitar</button>
+              <button class="h-8 px-4 rounded-full border border-gray-300 dark:border-white/20 text-gray-700 dark:text-white text-xs font-medium hover:bg-black/5 dark:hover:bg-white/5 transition-colors">Recusar</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Section: Earlier -->
-    <div class="px-4 py-1">
-      <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Anteriores</p>
-      <div class="group relative flex gap-4 p-3 mb-1 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-all cursor-pointer items-start">
-        <div class="relative shrink-0">
-          <div class="h-12 w-12 rounded-full bg-cover bg-center border border-white/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJ0XbRh1QMK6HGZ9e1XdOl78_ZDBvg9pDe9pGvcOohxip1UOa9pgY0FN0ioTYY-z21sjNL1LUDgOLiAq_my0dcPZm5gOYiFVOwqZi2W7Aa6tBeSTyrY6SEKlE0onSmiu-zjBoIeK-rqxDxlgctMw3X6yqHAiLAo-9cBrjmu6zpOWXuHfJ9XsQNskmwWXMhiJo3DQ16DjUJQ0GST11xuurBekPjnfZ9JCTi4d51YqNdEQ-XL-ue8yqeSK-rilBW2ewe20U7xslFwihV');"></div>
-          <div class="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#ef4444] ring-2 ring-white dark:ring-background-dark">
-            <span class="material-symbols-outlined text-white text-[12px] material-symbols-filled">favorite</span>
+      <!-- Section: Earlier -->
+      <div class="px-4 py-1">
+        <p class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">Anteriores</p>
+        <div class="group relative flex gap-4 p-3 mb-1 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-all cursor-pointer items-start">
+          <div class="relative shrink-0">
+            <div class="h-12 w-12 rounded-full bg-cover bg-center border border-white/10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCJ0XbRh1QMK6HGZ9e1XdOl78_ZDBvg9pDe9pGvcOohxip1UOa9pgY0FN0ioTYY-z21sjNL1LUDgOLiAq_my0dcPZm5gOYiFVOwqZi2W7Aa6tBeSTyrY6SEKlE0onSmiu-zjBoIeK-rqxDxlgctMw3X6yqHAiLAo-9cBrjmu6zpOWXuHfJ9XsQNskmwWXMhiJo3DQ16DjUJQ0GST11xuurBekPjnfZ9JCTi4d51YqNdEQ-XL-ue8yqeSK-rilBW2ewe20U7xslFwihV');"></div>
+            <div class="absolute -bottom-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#ef4444] ring-2 ring-white dark:ring-background-dark">
+              <span class="material-symbols-outlined text-white text-[12px] material-symbols-filled">favorite</span>
+            </div>
           </div>
-        </div>
-        <div class="flex flex-1 flex-col justify-center py-0.5">
-          <p class="text-sm text-slate-900 dark:text-gray-200 leading-snug">
-            <span class="font-semibold text-slate-900 dark:text-white">Maria Silva</span> curtiu sua publicação <span class="text-gray-600 dark:text-gray-400 italic">"Resumo de Cálculo II"</span>
-          </p>
-          <span class="text-xs text-gray-500 dark:text-gray-500 mt-1">2 h atrás</span>
+          <div class="flex flex-1 flex-col justify-center py-0.5">
+            <p class="text-sm text-slate-900 dark:text-gray-200 leading-snug">
+              <span class="font-semibold text-slate-900 dark:text-white">Maria Silva</span> curtiu sua publicação <span class="text-gray-600 dark:text-gray-400 italic">"Resumo de Cálculo II"</span>
+            </p>
+            <span class="text-xs text-gray-500 dark:text-gray-500 mt-1">2 h atrás</span>
+          </div>
         </div>
       </div>
     </div>

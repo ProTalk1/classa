@@ -13,24 +13,24 @@ export class GeminiService {
     if (process.env.API_KEY) {
       this.ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     } else {
-      console.error('Gemini API key not found in environment variables.');
+      console.error('Chave da API do Gemini não encontrada nas variáveis de ambiente.');
     }
   }
 
   async improveText(text: string): Promise<string> {
     if (!this.ai) {
-      throw new Error('Gemini AI client not initialized. Check API key.');
+      throw new Error('Cliente de IA do Gemini não inicializado. Verifique a chave da API.');
     }
 
     try {
-      const prompt = `Refine and improve the following text for a social media post on a student network. Make it more engaging and clear, but keep the original meaning. Return only the improved text. Text: "${text}"`;
+      const prompt = `Refine e melhore o texto a seguir para uma postagem em uma rede social de estudantes. Torne-o mais envolvente e claro, mantendo o significado original. Retorne apenas o texto aprimorado. Texto: "${text}"`;
       const response = await this.ai.models.generateContent({
         model: 'gemini-2.5-flash',
         contents: prompt,
       });
       return response.text;
     } catch (error) {
-      console.error('Error calling Gemini API:', error);
+      console.error('Erro ao chamar a API do Gemini:', error);
       // Return original text as a fallback
       return text;
     }

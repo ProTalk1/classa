@@ -1,130 +1,136 @@
-
-
-<div class="relative flex min-h-screen w-full flex-col overflow-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark text-slate-900 dark:text-white">
-  <!-- Background Decoration -->
-  <div class="absolute top-0 left-0 w-full h-[300px] bg-gradient-to-b from-primary/10 to-transparent pointer-events-none z-0"></div>
-  <div class="absolute -top-20 -right-20 w-64 h-64 bg-primary/20 rounded-full blur-[80px] z-0"></div>
-  
-  <!-- Header -->
-  <header class="relative z-10 flex items-center justify-between p-6">
-    <div class="flex items-center gap-3">
-      <div class="text-primary w-8 h-8">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M26 16C26 21.5228 21.5228 26 16 26C10.4772 26 6 21.5228 6 16C6 10.4772 10.4772 6 16 6" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-          <circle cx="16" cy="16" r="3" fill="currentColor"/>
-        </svg>
-      </div>
-      <span class="text-2xl font-bold tracking-tight">Classa</span>
-    </div>
-    <button (click)="toggleTheme()" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-      <span class="material-symbols-outlined">
-        {{ themeService.theme() === 'dark' ? 'dark_mode' : 'light_mode' }}
-      </span>
-    </button>
-  </header>
-  
-  <!-- Main Content -->
-  <main class="relative z-10 flex flex-1 flex-col px-6 justify-center">
-    <div class="mb-8 text-center sm:text-left">
-      <h1 class="text-4xl font-bold leading-tight tracking-tight mb-2">
-        Sua comunidade <br/>
-        <span class="text-primary">acadêmica</span>
-      </h1>
-      <p class="text-slate-500 dark:text-slate-400 text-lg">
-        Conecte-se, estude e evolua junto.
-      </p>
-    </div>
-    
-    <form class="flex flex-col gap-5" (ngSubmit)="handleLogin()">
-      <!-- Email Field -->
-      <div class="flex flex-col gap-1.5">
-        <label class="sr-only" for="email">Email Institucional</label>
-        <div class="group relative flex items-center rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-transparent focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-          <div class="pl-5 pr-2 text-slate-400 dark:text-slate-500 flex items-center justify-center">
-            <span class="material-symbols-outlined">mail</span>
+<div class="min-h-screen w-full bg-background-light dark:bg-background-dark text-slate-900 dark:text-white">
+  <div class="flex min-h-screen">
+    <!-- Form Side -->
+    <div class="relative flex w-full flex-1 flex-col justify-center px-6 py-12 md:flex-none md:px-20 lg:w-1/2">
+      <div class="mx-auto w-full max-w-sm lg:w-96">
+        <!-- Header -->
+        <header class="relative z-10 flex items-center justify-between mb-8">
+          <div class="flex items-center gap-3">
+            <div class="text-primary w-8 h-8">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M26 16C26 21.5228 21.5228 26 16 26C10.4772 26 6 21.5228 6 16C6 10.4772 10.4772 6 16 6" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="16" cy="16" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <span class="text-2xl font-bold tracking-tight">Classa</span>
           </div>
-          <input [(ngModel)]="email" name="email" class="flex-1 w-full h-14 bg-transparent border-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-0 text-base font-normal leading-normal px-2 rounded-r-full" id="email" placeholder="Email Institucional" type="email" required />
-        </div>
-      </div>
-      
-      <!-- Password Field -->
-      <div class="flex flex-col gap-1.5">
-        <label class="sr-only" for="password">Senha</label>
-        <div class="group relative flex items-center rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-transparent focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
-          <div class="pl-5 pr-2 text-slate-400 dark:text-slate-500 flex items-center justify-center">
-            <span class="material-symbols-outlined">lock</span>
-          </div>
-          <input [(ngModel)]="password" name="password" class="flex-1 w-full h-14 bg-transparent border-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-0 text-base font-normal leading-normal px-2" id="password" placeholder="Senha" [type]="passwordVisible() ? 'text' : 'password'" required />
-          <button (click)="togglePasswordVisibility()" class="pr-5 pl-2 text-slate-400 hover:text-primary transition-colors focus:outline-none" type="button">
-            <span class="material-symbols-outlined text-xl">
-              {{ passwordVisible() ? 'visibility' : 'visibility_off' }}
+          <button (click)="toggleTheme()" class="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+            <span class="material-symbols-outlined">
+              {{ themeService.theme() === 'dark' ? 'dark_mode' : 'light_mode' }}
             </span>
           </button>
-        </div>
-      </div>
-      
-      <!-- Forgot Password -->
-      <div class="flex justify-end">
-        <a class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
-          Esqueceu a senha?
-        </a>
-      </div>
-      
-      @if (errorMessage()) {
-        <div class="text-red-500 text-sm text-center p-2 bg-red-500/10 rounded-lg">
-          {{ errorMessage() }}
-        </div>
-      }
+        </header>
 
-      <!-- Main Action -->
-      <button class="mt-2 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all text-background-dark text-lg font-bold leading-normal tracking-wide shadow-lg shadow-primary/25 disabled:opacity-70 disabled:cursor-not-allowed" type="submit" [disabled]="loading()">
-        @if (loading()) {
-          <div class="w-6 h-6 border-2 border-background-dark border-t-transparent rounded-full animate-spin"></div>
-        } @else {
-          <span class="truncate">Acessar Portal</span>
-          <span class="material-symbols-outlined ml-2 text-xl">arrow_forward</span>
-        }
-      </button>
-    </form>
-    
-    <!-- Divider -->
-    <div class="relative my-8">
-      <div class="absolute inset-0 flex items-center">
-        <span class="w-full border-t border-slate-200 dark:border-slate-800"></span>
-      </div>
-      <div class="relative flex justify-center text-xs uppercase">
-        <span class="bg-background-light dark:bg-background-dark px-4 text-slate-500 dark:text-slate-500 tracking-wider font-semibold">
-          Ou entre com
-        </span>
+        <!-- Main Content -->
+        <main class="relative z-10">
+          <div class="mb-8">
+            <h1 class="text-3xl font-bold leading-tight tracking-tight lg:text-4xl">
+              Sua comunidade <br/>
+              <span class="text-primary">acadêmica</span>
+            </h1>
+            <p class="mt-2 text-slate-500 dark:text-slate-400 text-base lg:text-lg">
+              Conecte-se, estude e evolua junto.
+            </p>
+          </div>
+          
+          <form class="flex flex-col gap-5" (ngSubmit)="handleLogin()">
+            <!-- Email Field -->
+            <div class="flex flex-col gap-1.5">
+              <label class="sr-only" for="email">Email Institucional</label>
+              <div class="group relative flex items-center rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-border-dark focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+                <div class="pl-5 pr-2 text-slate-400 dark:text-slate-500 flex items-center justify-center">
+                  <span class="material-symbols-outlined">mail</span>
+                </div>
+                <input [(ngModel)]="email" name="email" class="flex-1 w-full h-14 bg-transparent border-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-0 text-base font-normal leading-normal px-2 rounded-r-full" id="email" placeholder="Email Institucional" type="email" required />
+              </div>
+            </div>
+            
+            <!-- Password Field -->
+            <div class="flex flex-col gap-1.5">
+              <label class="sr-only" for="password">Senha</label>
+              <div class="group relative flex items-center rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-border-dark focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all">
+                <div class="pl-5 pr-2 text-slate-400 dark:text-slate-500 flex items-center justify-center">
+                  <span class="material-symbols-outlined">lock</span>
+                </div>
+                <input [(ngModel)]="password" name="password" class="flex-1 w-full h-14 bg-transparent border-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:ring-0 text-base font-normal leading-normal px-2" id="password" placeholder="Senha" [type]="passwordVisible() ? 'text' : 'password'" required />
+                <button (click)="togglePasswordVisibility()" class="pr-5 pl-2 text-slate-400 hover:text-primary transition-colors focus:outline-none" type="button">
+                  <span class="material-symbols-outlined text-xl">
+                    {{ passwordVisible() ? 'visibility' : 'visibility_off' }}
+                  </span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Forgot Password -->
+            <div class="flex justify-end">
+              <a class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors" href="#">
+                Esqueceu a senha?
+              </a>
+            </div>
+            
+            @if (errorMessage()) {
+              <div class="text-red-500 text-sm text-center p-2 bg-red-500/10 rounded-lg">
+                {{ errorMessage() }}
+              </div>
+            }
+
+            <!-- Main Action -->
+            <button class="mt-2 flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-14 px-8 bg-primary hover:bg-primary/90 active:scale-[0.98] transition-all text-background-dark text-lg font-bold leading-normal tracking-wide shadow-lg shadow-primary/25 disabled:opacity-70 disabled:cursor-not-allowed" type="submit" [disabled]="loading()">
+              @if (loading()) {
+                <div class="w-6 h-6 border-2 border-background-dark border-t-transparent rounded-full animate-spin"></div>
+              } @else {
+                <span class="truncate">Acessar Portal</span>
+                <span class="material-symbols-outlined ml-2 text-xl">arrow_forward</span>
+              }
+            </button>
+          </form>
+          
+          <!-- Divider -->
+          <div class="relative my-8">
+            <div class="absolute inset-0 flex items-center">
+              <span class="w-full border-t border-slate-200 dark:border-slate-800"></span>
+            </div>
+            <div class="relative flex justify-center text-xs uppercase">
+              <span class="bg-background-light dark:bg-background-dark px-4 text-slate-500 dark:text-slate-500 tracking-wider font-semibold">
+                Ou entre com
+              </span>
+            </div>
+          </div>
+          
+          <!-- Social Login -->
+          <div class="flex items-center justify-center gap-4">
+            <button (click)="handleGoogleLogin()" [disabled]="googleLoading()" class="flex items-center justify-center w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-border-dark hover:bg-slate-100 dark:hover:bg-[#233b2e] transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed">
+              @if (googleLoading()) {
+                <div class="w-6 h-6 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div>
+              } @else {
+                <svg class="w-6 h-6" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.222,0-9.657-3.356-11.303-7.962l-6.571,4.819C9.656,39.663,16.318,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238C42.021,35.591,44,30.134,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path></svg>
+              }
+            </button>
+            <button (click)="handleAppleLogin()" [disabled]="appleLoading()" class="flex items-center justify-center w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-border-dark hover:bg-slate-100 dark:hover:bg-[#233b2e] transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed">
+              @if (appleLoading()) {
+                <div class="w-6 h-6 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div>
+              } @else {
+                <svg class="w-7 h-7 text-slate-900 dark:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.4,12.55C17.4,10.59,16.23,9.05,14.34,8.47C14.43,7.58,15.15,6.79,16.09,6.79C16.27,6.79,16.46,6.82,16.63,6.87C16.14,6.05,15.26,5.5,14.2,5.5C12.83,5.5,11.83,6.47,11.45,7.74C11,7.66,10.5,7.61,10,7.61C8.2,7.61,6.6,8.76,6.07,10.45C5.12,10.2,4.14,10.28,3.31,10.66C3.43,12.53,4.68,13.9,6.4,13.9C6.4,13.9,6.4,13.9,6.41,13.9C6.2,14.8,5.83,15.65,5.33,16.36C6.21,17.29,7.29,17.92,8.5,18.15C9.3,19.3,10.6,20,12,20C12.36,20,12.72,19.95,13.07,19.86C13.47,20.93,14.43,21.7,15.58,21.84C15.63,21.84,15.67,21.84,15.72,21.84C16.96,21.84,18.25,21.23,19.09,20.19C20.26,19.22,20.91,17.83,20.91,16.25C20.91,14.28,19.46,12.63,17.4,12.55M12,2C6.48,2,2,6.48,2,12C2,17.52,6.48,22,12,22C17.52,22,22,17.52,22,12C22,6.48,17.52,2,12,2Z"></path></svg>
+              }
+            </button>
+          </div>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="mt-8 text-center z-10">
+          <p class="text-slate-500 dark:text-slate-400">
+            Novo por aqui? 
+            <a class="font-bold text-primary hover:underline ml-1" routerLink="/register">
+              Crie sua conta
+            </a>
+          </p>
+        </footer>
       </div>
     </div>
-    
-    <!-- Social Login -->
-    <div class="flex items-center justify-center gap-4">
-      <button (click)="handleGoogleLogin()" [disabled]="googleLoading()" class="flex items-center justify-center w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-transparent hover:bg-slate-100 dark:hover:bg-[#233b2e] transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed">
-        @if (googleLoading()) {
-          <div class="w-6 h-6 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div>
-        } @else {
-          <svg class="w-6 h-6" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.222,0-9.657-3.356-11.303-7.962l-6.571,4.819C9.656,39.663,16.318,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.574l6.19,5.238C42.021,35.591,44,30.134,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path></svg>
-        }
-      </button>
-      <button (click)="handleAppleLogin()" [disabled]="appleLoading()" class="flex items-center justify-center w-14 h-14 rounded-full bg-surface-light dark:bg-surface-dark border border-slate-200 dark:border-transparent hover:bg-slate-100 dark:hover:bg-[#233b2e] transition-colors shadow-sm disabled:opacity-70 disabled:cursor-not-allowed">
-        @if (appleLoading()) {
-          <div class="w-6 h-6 border-2 border-slate-400 border-t-transparent rounded-full animate-spin"></div>
-        } @else {
-          <svg class="w-7 h-7 text-slate-900 dark:text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.4,12.55C17.4,10.59,16.23,9.05,14.34,8.47C14.43,7.58,15.15,6.79,16.09,6.79C16.27,6.79,16.46,6.82,16.63,6.87C16.14,6.05,15.26,5.5,14.2,5.5C12.83,5.5,11.83,6.47,11.45,7.74C11,7.66,10.5,7.61,10,7.61C8.2,7.61,6.6,8.76,6.07,10.45C5.12,10.2,4.14,10.28,3.31,10.66C3.43,12.53,4.68,13.9,6.4,13.9C6.4,13.9,6.4,13.9,6.41,13.9C6.2,14.8,5.83,15.65,5.33,16.36C6.21,17.29,7.29,17.92,8.5,18.15C9.3,19.3,10.6,20,12,20C12.36,20,12.72,19.95,13.07,19.86C13.47,20.93,14.43,21.7,15.58,21.84C15.63,21.84,15.67,21.84,15.72,21.84C16.96,21.84,18.25,21.23,19.09,20.19C20.26,19.22,20.91,17.83,20.91,16.25C20.91,14.28,19.46,12.63,17.4,12.55M12,2C6.48,2,2,6.48,2,12C2,17.52,6.48,22,12,22C17.52,22,22,17.52,22,12C22,6.48,17.52,2,12,2Z"></path></svg>
-        }
-      </button>
+    <!-- Image Side -->
+    <div class="relative hidden w-0 flex-1 lg:block">
+      <div class="absolute inset-0 h-full w-full bg-gradient-to-br from-primary/10 via-transparent to-transparent dark:from-primary/10 dark:via-background-dark/80 dark:to-background-dark"></div>
+      <div class="absolute -bottom-40 -right-20 w-96 h-96 bg-primary/20 rounded-full blur-[100px] z-0"></div>
     </div>
-  </main>
-  
-  <!-- Footer -->
-  <footer class="p-6 text-center z-10">
-    <p class="text-slate-500 dark:text-slate-400">
-      Novo por aqui? 
-      <a class="font-bold text-primary hover:underline ml-1" href="#">
-        Crie sua conta
-      </a>
-    </p>
-  </footer>
+  </div>
 </div>

@@ -20,6 +20,7 @@ export class SupabaseService {
   
   _session = signal<Session | null>(null);
   _profile = signal<Profile | null>(null);
+  authReady = signal(false);
 
   constructor() {
     this.supabase = createClient(this.supabaseUrl, this.supabaseKey);
@@ -31,6 +32,7 @@ export class SupabaseService {
       } else {
         this._profile.set(null);
       }
+      this.authReady.set(true);
     });
   }
   
@@ -53,7 +55,7 @@ export class SupabaseService {
       .order('created_at', { ascending: false });
 
     if (error) {
-      console.error('Error fetching posts:', error);
+      console.error('Erro ao buscar postagens:', error);
       throw error;
     }
     return data;
@@ -62,7 +64,7 @@ export class SupabaseService {
   async getProfile() {
     try {
       const user = this.user;
-      if (!user) throw new Error('No user logged in');
+      if (!user) throw new Error('Nenhum usuário logado');
 
       const { data, error, status } = await this.supabase
         .from('profiles')
@@ -78,14 +80,14 @@ export class SupabaseService {
         this._profile.set(data as Profile);
       }
     } catch (error) {
-      console.error('Error fetching profile:', error);
+      console.error('Erro ao buscar perfil:', error);
     }
   }
 
   async updateProfile(profile: Partial<Profile>) {
     try {
         const user = this.user;
-        if (!user) throw new Error('No user logged in');
+        if (!user) throw new Error('Nenhum usuário logado');
 
         const updates = {
             id: user.id,
@@ -99,7 +101,7 @@ export class SupabaseService {
         }
         await this.getProfile();
     } catch (error) {
-        console.error('Error updating profile:', error);
+        console.error('Erro ao atualizar perfil:', error);
         if (error instanceof Error) {
             alert(error.message);
         }
@@ -123,7 +125,7 @@ export class SupabaseService {
         return data.publicUrl;
 
     } catch (error) {
-        console.error('Error uploading avatar:', error);
+        console.error('Erro ao enviar avatar:', error);
         return null;
     }
   }
@@ -143,7 +145,7 @@ export class SupabaseService {
     return this.supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin,
+        redirectTo: `${window.location.origin}${window.location.pathname}`,
       },
     });
   }
@@ -152,7 +154,7 @@ export class SupabaseService {
     return this.supabase.auth.signInWithOAuth({
       provider: 'apple',
       options: {
-        redirectTo: window.location.origin,
+        redirectTo: `${window.location.origin}${window.location.pathname}`,
       },
     });
   }

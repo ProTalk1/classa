@@ -1,7 +1,6 @@
-
 <div class="flex h-full flex-col overflow-x-hidden pb-24">
   <!-- Header -->
-  <header class="sticky top-0 z-20 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md transition-colors duration-200">
+  <header class="sticky md:static top-0 z-20 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md transition-colors duration-200">
     <div class="flex items-center p-4 pb-2 justify-between">
       <div class="flex items-center gap-3">
         <div class="relative group cursor-pointer">
@@ -46,68 +45,70 @@
   </header>
 
   <!-- Main Content: Groups List -->
-  <main class="flex-1 px-4 py-2 space-y-4">
-    <div class="flex items-center justify-between pt-2">
-      <h3 class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Grupos Ativos</h3>
-      <button class="text-primary text-sm font-medium hover:underline">Ver todos</button>
-    </div>
+  <main class="flex-1 py-2">
+    <div class="max-w-4xl mx-auto px-4 space-y-4">
+      <div class="flex items-center justify-between pt-2">
+        <h3 class="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Grupos Ativos</h3>
+        <button class="text-primary text-sm font-medium hover:underline">Ver todos</button>
+      </div>
 
-    <!-- Card 1: Notification State -->
-    <div class="group relative flex flex-col gap-4 overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
-      <div class="flex items-center gap-4">
-        <div class="relative shrink-0">
-          <div class="bg-center bg-no-repeat bg-cover rounded-xl size-16 shadow-inner" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCVGVPKTuSPZ9oqmokgM8Kx3B2t_bLK9tocQ-dEho_yhsOHIt7GO_a7_vnpLNC9V68btHa9maKe2Y9udMn9YGOo4xmcwWpdzx5mvjbjUJ37jXN7fGqbrvvcBMKqbCe-N4VA9NzBYRSGKpN18IcRS768SLDIBDGKBQRQUU078lfjK85JmqwCzYDRd-5eF9AmcC8wxNR59fxCsyUQ_oFhvtVLJE3GZkaBB4p8Y1wfcZFvDWSC34S8MF0ipVe52-i0-KZyFq8ZIcrSTgho");'></div>
-          <div class="absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-black border-2 border-surface-light dark:border-surface-dark">3</div>
+      <!-- Card 1: Notification State -->
+      <div class="group relative flex flex-col gap-4 overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] cursor-pointer">
+        <div class="flex items-center gap-4">
+          <div class="relative shrink-0">
+            <div class="bg-center bg-no-repeat bg-cover rounded-xl size-16 shadow-inner" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCVGVPKTuSPZ9oqmokgM8Kx3B2t_bLK9tocQ-dEho_yhsOHIt7GO_a7_vnpLNC9V68btHa9maKe2Y9udMn9YGOo4xmcwWpdzx5mvjbjUJ37jXN7fGqbrvvcBMKqbCe-N4VA9NzBYRSGKpN18IcRS768SLDIBDGKBQRQUU078lfjK85JmqwCzYDRd-5eF9AmcC8wxNR59fxCsyUQ_oFhvtVLJE3GZkaBB4p8Y1wfcZFvDWSC34S8MF0ipVe52-i0-KZyFq8ZIcrSTgho");'></div>
+            <div class="absolute -top-1 -right-1 flex size-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-black border-2 border-surface-light dark:border-surface-dark">3</div>
+          </div>
+          <div class="flex flex-col justify-center flex-1 min-w-0">
+            <div class="flex items-center justify-between mb-1">
+              <p class="text-slate-900 dark:text-white text-lg font-bold leading-tight truncate">Engenharia de Software</p>
+              <span class="text-[10px] font-bold uppercase tracking-wide text-primary bg-primary/10 px-2 py-0.5 rounded-full">Turma A</span>
+            </div>
+            <p class="text-slate-500 dark:text-slate-400 text-sm font-normal line-clamp-1">Discussão sobre o projeto final e prazos.</p>
+          </div>
+          <div class="shrink-0 text-slate-300 dark:text-slate-600 group-hover:text-primary transition-colors">
+            <span class="material-symbols-outlined">chevron_right</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+          <div class="flex -space-x-2 overflow-hidden">
+            <img alt="Student avatar 1" class="inline-block size-5 rounded-full ring-2 ring-white dark:ring-surface-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCwxFa9OuRPOx8WugDYl6Ux5DVLYF2H8Wf3VnV_AV03Ecr7W89kMIFvSoG49yOrEA2wTEQsDRb8qDLkaELTJzUOi9pEc42fpfMbKGg0CVtiI2EpIZTMgBEaAxmNI36Oqxyssx94qbrkLemQqhNiAcpInT9zaO-k4FJ9QfapSlooIMvv2rvBWpRYilXif82k0AGt0x3OIrl9Kt4leRHqM7LST-cp8rczwvcFyS7mJnIdQAkdT-dAinIeRnLVx8OcddsYOaQWZLb1jUS" />
+            <img alt="Student avatar 2" class="inline-block size-5 rounded-full ring-2 ring-white dark:ring-surface-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzjyoQszzwStieTh0XyFQ42ZJsFlUw3C4almgRf2gaZoPRj82dLcGp2WYP0WL5Xo0mgAiq5KTUKVwwFwPur8w7ML5KNfoY0f8rfUnWkSO-6gEdIrF1rKX7k_Gx85YCehYdMAokOVCHKritY_TqYsiAbv3qMqXsZCEsbni-bgH1P6z7iL3hpIJ2v_TMu-2v7MBdYpS4JIOFIFj5cfGKhq66B_PVYhAi2TYtviQ3i_FcPkcsxYgGYt8gtfRQZqhVLieXlxteFgFgTKyS" />
+          </div>
+          <p class="text-xs text-slate-400">Lucas e Ana postaram recentemente</p>
+        </div>
+      </div>
+
+      <!-- Other cards... -->
+      <div class="group relative flex items-center gap-4 overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] cursor-pointer border-l-4 border-primary">
+        <div class="shrink-0">
+          <div class="rounded-xl size-16 shadow-inner flex items-center justify-center bg-slate-100 dark:bg-slate-800">
+            <span class="material-symbols-outlined text-3xl text-slate-400">school</span>
+          </div>
         </div>
         <div class="flex flex-col justify-center flex-1 min-w-0">
-          <div class="flex items-center justify-between mb-1">
-            <p class="text-slate-900 dark:text-white text-lg font-bold leading-tight truncate">Engenharia de Software</p>
-            <span class="text-[10px] font-bold uppercase tracking-wide text-primary bg-primary/10 px-2 py-0.5 rounded-full">Turma A</span>
+          <div class="flex items-center gap-2">
+            <p class="text-slate-900 dark:text-white text-lg font-bold leading-tight truncate">Centro Acadêmico</p>
+            <span class="material-symbols-outlined text-primary text-sm material-symbols-filled">verified</span>
           </div>
-          <p class="text-slate-500 dark:text-slate-400 text-sm font-normal line-clamp-1">Discussão sobre o projeto final e prazos.</p>
+          <p class="text-slate-500 dark:text-slate-400 text-sm font-normal line-clamp-1">Eventos, festas e comunicados oficiais.</p>
         </div>
         <div class="shrink-0 text-slate-300 dark:text-slate-600 group-hover:text-primary transition-colors">
           <span class="material-symbols-outlined">chevron_right</span>
         </div>
       </div>
-      <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
-        <div class="flex -space-x-2 overflow-hidden">
-          <img alt="Student avatar 1" class="inline-block size-5 rounded-full ring-2 ring-white dark:ring-surface-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCwxFa9OuRPOx8WugDYl6Ux5DVLYF2H8Wf3VnV_AV03Ecr7W89kMIFvSoG49yOrEA2wTEQsDRb8qDLkaELTJzUOi9pEc42fpfMbKGg0CVtiI2EpIZTMgBEaAxmNI36Oqxyssx94qbrkLemQqhNiAcpInT9zaO-k4FJ9QfapSlooIMvv2rvBWpRYilXif82k0AGt0x3OIrl9Kt4leRHqM7LST-cp8rczwvcFyS7mJnIdQAkdT-dAinIeRnLVx8OcddsYOaQWZLb1jUS" />
-          <img alt="Student avatar 2" class="inline-block size-5 rounded-full ring-2 ring-white dark:ring-surface-dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzjyoQszzwStieTh0XyFQ42ZJsFlUw3C4almgRf2gaZoPRj82dLcGp2WYP0WL5Xo0mgAiq5KTUKVwwFwPur8w7ML5KNfoY0f8rfUnWkSO-6gEdIrF1rKX7k_Gx85YCehYdMAokOVCHKritY_TqYsiAbv3qMqXsZCEsbni-bgH1P6z7iL3hpIJ2v_TMu-2v7MBdYpS4JIOFIFj5cfGKhq66B_PVYhAi2TYtviQ3i_FcPkcsxYgGYt8gtfRQZqhVLieXlxteFgFgTKyS" />
+      
+      <!-- Create New Suggestion -->
+      <div class="mt-6 flex flex-col items-center justify-center p-8 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700/50 text-center space-y-3">
+        <div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+          <span class="material-symbols-outlined">group_add</span>
         </div>
-        <p class="text-xs text-slate-400">Lucas e Ana postaram recentemente</p>
+        <h4 class="text-slate-900 dark:text-white font-bold">Não encontrou sua turma?</h4>
+        <p class="text-slate-500 text-sm max-w-[200px]">Crie um novo grupo para estudar com seus amigos.</p>
+        <button class="mt-2 px-6 py-2 bg-primary text-black font-bold rounded-full text-sm hover:bg-primary/90 transition-colors">
+          Criar Grupo
+        </button>
       </div>
-    </div>
-
-    <!-- Other cards... -->
-    <div class="group relative flex items-center gap-4 overflow-hidden rounded-xl bg-surface-light dark:bg-surface-dark p-4 shadow-sm transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] cursor-pointer border-l-4 border-primary">
-      <div class="shrink-0">
-        <div class="rounded-xl size-16 shadow-inner flex items-center justify-center bg-slate-100 dark:bg-slate-800">
-          <span class="material-symbols-outlined text-3xl text-slate-400">school</span>
-        </div>
-      </div>
-      <div class="flex flex-col justify-center flex-1 min-w-0">
-        <div class="flex items-center gap-2">
-          <p class="text-slate-900 dark:text-white text-lg font-bold leading-tight truncate">Centro Acadêmico</p>
-          <span class="material-symbols-outlined text-primary text-sm material-symbols-filled">verified</span>
-        </div>
-        <p class="text-slate-500 dark:text-slate-400 text-sm font-normal line-clamp-1">Eventos, festas e comunicados oficiais.</p>
-      </div>
-      <div class="shrink-0 text-slate-300 dark:text-slate-600 group-hover:text-primary transition-colors">
-        <span class="material-symbols-outlined">chevron_right</span>
-      </div>
-    </div>
-    
-    <!-- Create New Suggestion -->
-    <div class="mt-6 flex flex-col items-center justify-center p-8 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700/50 text-center space-y-3">
-      <div class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
-        <span class="material-symbols-outlined">group_add</span>
-      </div>
-      <h4 class="text-slate-900 dark:text-white font-bold">Não encontrou sua turma?</h4>
-      <p class="text-slate-500 text-sm max-w-[200px]">Crie um novo grupo para estudar com seus amigos.</p>
-      <button class="mt-2 px-6 py-2 bg-primary text-black font-bold rounded-full text-sm hover:bg-primary/90 transition-colors">
-        Criar Grupo
-      </button>
     </div>
   </main>
 </div>

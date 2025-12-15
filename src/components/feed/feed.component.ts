@@ -1,3 +1,4 @@
+
 import { Component, ChangeDetectionStrategy, signal, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -64,7 +65,7 @@ export class FeedComponent implements OnInit {
         this.posts.set(postsWithStats);
       }
     } catch (e) {
-      console.error('Error loading posts', e);
+      console.error('Erro ao carregar postagens', e);
     } finally {
       this.loading.set(false);
     }
@@ -87,17 +88,17 @@ export class FeedComponent implements OnInit {
     
     let interval = seconds / 86400; // days
     if (interval > 1) {
-      return `${Math.floor(interval)}d ago`;
+      return `${Math.floor(interval)}d atrás`;
     }
     interval = seconds / 3600; // hours
     if (interval > 1) {
-      return `${Math.floor(interval)}h ago`;
+      return `${Math.floor(interval)}h atrás`;
     }
     interval = seconds / 60; // minutes
     if (interval > 1) {
-      return `${Math.floor(interval)}m ago`;
+      return `${Math.floor(interval)}m atrás`;
     }
-    return 'Just now';
+    return 'Agora mesmo';
   }
 
   toggleLike(post: Post) {
@@ -210,7 +211,7 @@ export class FeedComponent implements OnInit {
       const improvedText = await this.geminiService.improveText(this.editingPostContent());
       this.editingPostContent.set(improvedText);
     } catch(error) {
-      console.error("Failed to improve text with AI", error);
+      console.error("Falha ao melhorar o texto com IA", error);
       // Optionally show an error to the user
     } finally {
       this.isImprovingWithAI.set(false);

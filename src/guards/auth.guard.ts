@@ -1,20 +1,24 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn, Router, UrlTree } from '@angular/router';
 import { SupabaseService } from '../services/supabase.service';
-import { map } from 'rxjs/operators';
+import { map, filter, take } from 'rxjs/operators';
 import { toObservable } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
 
-export const authGuard: CanActivateFn = () => {
+export const authGuard: CanActivateFn = (): Observable<boolean | UrlTree> => {
   const supabase = inject(SupabaseService);
-  // FIX: Explicitly type `router` to resolve type inference issue.
   const router: Router = inject(Router);
 
-  // Supabase auth state is reactive via signals
-  const session = supabase.session();
-  if (session) {
-      return true;
-  } else {
-      router.navigate(['/login']);
-      return false;
-  }
+  return toObservable(supabase.authReady).pipe(
+    filter(ready => ready), // Wait until Supabase client has checked session
+    take(1), // We only need to check once
+    map(() => {
+      const session = supabase.session();
+      if (session) {
+        return true;
+      }
+      // Redirect to login page if no session
+      return router.createUrlTree(['/login']);
+    })
+  );
 };

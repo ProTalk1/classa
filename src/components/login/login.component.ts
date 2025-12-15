@@ -41,7 +41,7 @@ export class LoginComponent {
       if (error instanceof Error) {
         this.errorMessage.set(error.message);
       } else {
-        this.errorMessage.set('An unexpected error occurred.');
+        this.errorMessage.set('Ocorreu um erro inesperado.');
       }
     } finally {
       this.loading.set(false);
@@ -61,7 +61,7 @@ export class LoginComponent {
       if (error instanceof Error) {
         this.errorMessage.set(error.message);
       } else {
-        this.errorMessage.set('An unexpected error occurred with Google Sign-In.');
+        this.errorMessage.set('Ocorreu um erro inesperado com o login do Google.');
       }
     } finally {
       this.googleLoading.set(false);
@@ -81,7 +81,7 @@ export class LoginComponent {
       if (error instanceof Error) {
         this.errorMessage.set(error.message);
       } else {
-        this.errorMessage.set('An unexpected error occurred with Apple Sign-In.');
+        this.errorMessage.set('Ocorreu um erro inesperado com o login da Apple.');
       }
     } finally {
       this.appleLoading.set(false);

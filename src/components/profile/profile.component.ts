@@ -1,3 +1,4 @@
+
 import { Component, ChangeDetectionStrategy, inject, signal, effect } from '@angular/core';
 import { Router } from '@angular/router';
 import { SupabaseService, Profile } from '../../services/supabase.service';
@@ -39,7 +40,7 @@ export class ProfileComponent {
     try {
       this.loading.set(true);
       if (!input.files || input.files.length === 0) {
-        throw new Error('You must select an image to upload.');
+        throw new Error('Você deve selecionar uma imagem para enviar.');
       }
 
       const file = input.files[0];
@@ -64,7 +65,7 @@ export class ProfileComponent {
     try {
       this.loading.set(true);
       const user = this.supabase.user;
-      if (!user) throw new Error('No user logged in');
+      if (!user) throw new Error('Nenhum usuário logado');
 
       const updates: Partial<Profile> = {
         id: user.id,
@@ -74,7 +75,7 @@ export class ProfileComponent {
       };
 
       await this.supabase.updateProfile(updates);
-      alert('Profile updated successfully!');
+      alert('Perfil atualizado com sucesso!');
 
     } catch (error) {
       if (error instanceof Error) alert(error.message);
