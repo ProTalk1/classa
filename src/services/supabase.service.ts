@@ -138,5 +138,23 @@ export class SupabaseService {
   async signOut() {
     return this.supabase.auth.signOut();
   }
+
+  async signInWithGoogle() {
+    return this.supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+  }
+
+  async signInWithApple() {
+    return this.supabase.auth.signInWithOAuth({
+      provider: 'apple',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    });
+  }
   
 }

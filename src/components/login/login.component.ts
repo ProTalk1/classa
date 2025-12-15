@@ -1,3 +1,4 @@
+
 import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -21,6 +22,8 @@ export class LoginComponent {
   email = signal('');
   password = signal('');
   loading = signal(false);
+  googleLoading = signal(false);
+  appleLoading = signal(false);
   errorMessage = signal<string | null>(null);
   passwordVisible = signal(false);
 
@@ -44,6 +47,47 @@ export class LoginComponent {
       this.loading.set(false);
     }
   }
+
+  async handleGoogleLogin() {
+    this.googleLoading.set(true);
+    this.errorMessage.set(null);
+    try {
+      const { error } = await this.supabase.signInWithGoogle();
+      if (error) {
+        this.errorMessage.set(error.message);
+      }
+      // Supabase handles the redirect, so no navigation is needed here.
+    } catch (error) {
+      if (error instanceof Error) {
+        this.errorMessage.set(error.message);
+      } else {
+        this.errorMessage.set('An unexpected error occurred with Google Sign-In.');
+      }
+    } finally {
+      this.googleLoading.set(false);
+    }
+  }
+
+  async handleAppleLogin() {
+    this.appleLoading.set(true);
+    this.errorMessage.set(null);
+    try {
+      const { error } = await this.supabase.signInWithApple();
+      if (error) {
+        this.errorMessage.set(error.message);
+      }
+      // Supabase handles the redirect.
+    } catch (error) {
+      if (error instanceof Error) {
+        this.errorMessage.set(error.message);
+      } else {
+        this.errorMessage.set('An unexpected error occurred with Apple Sign-In.');
+      }
+    } finally {
+      this.appleLoading.set(false);
+    }
+  }
+
 
   togglePasswordVisibility() {
     this.passwordVisible.update(v => !v);
